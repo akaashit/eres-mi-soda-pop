@@ -94,7 +94,7 @@ LocalPlayer.CharacterAdded:Connect(bindCharacter)
 -- AntiAFK
 local function startAntiAFK()
     if State._afkConn then State._afkConn:Disconnect() end
-    local vu = game:FindService("VirtualUser") or loadstring("") -- cargar nada, solo para evitar warnings
+    local vu = game:FindService("VirtualUser") or game:GetService("VirtualUser") -- cargar nada, solo para evitar warnings
     vu = vu or game:GetService("VirtualUser")
     State._afkConn = LocalPlayer.Idled:Connect(function()
         pcall(function()
@@ -342,8 +342,7 @@ local function buildUI()
     sg.Name = "MM2Hub_UI"
     sg.IgnoreGuiInset = true
     sg.ResetOnSpawn = false
-    sg.Parent = game:GetService("CoreGui")
-
+    sg.Parent = (gethui and gethui()) or game:GetService("CoreGui")
     local main = Instance.new("Frame")
     main.Name = "Main"
     main.Size = UDim2.new(0, 360, 0, 230)
