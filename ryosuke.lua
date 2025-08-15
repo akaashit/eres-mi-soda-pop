@@ -550,4 +550,25 @@ local function buildUI()
         local n = tonumber(txt)
         if n and n > 0 then
             State.BagLimit = n
-         
+         else
+            notify("AutoFarm", "Valor inválido, usando por defecto (" .. SETTINGS.BAG_LIMIT_DEFAULT .. ")", 3)
+            State.BagLimit = SETTINGS.BAG_LIMIT_DEFAULT
+        end
+    end)
+
+    -- Botón de cerrar
+    makeButton("Cerrar UI", 196, function()
+        sg:Destroy()
+    end)
+end -- Cierre de buildUI()
+
+--==============================--
+--           INICIO              --
+--==============================--
+pcall(function()
+    buildUI()        -- Crear la interfaz
+    startNoClip()    -- Activar noclip por defecto
+    startAntiAFK()   -- Activar anti-afk por defecto
+end)
+
+notify("MM2 Script", "Script cargado correctamente.", 4)
